@@ -1,8 +1,9 @@
 import { NavigationContainer } from "@react-navigation/native";
-import { Wishlist, Played, Profile } from "./pages/pages";
+import { Wishlist, Played, Profile, Search } from "./pages/pages";
 import { createMaterialBottomTabNavigator } from "react-native-paper/react-navigation";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { secondaryColour } from "./components/styles";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -22,7 +23,7 @@ export default function App() {
           initialRouteName="Wishlist"
           activeColor="#FFFFFF"
           inactiveColor="#000000"
-          barStyle={{ backgroundColor: "#1D59BD" }}
+          barStyle={{ backgroundColor: secondaryColour }}
         >
           <Tab.Screen
             name="Played"
@@ -33,6 +34,11 @@ export default function App() {
             name="Wishlist"
             component={Wishlist}
             options={tabOptions("star")}
+          />
+          <Tab.Screen
+            name="Search"
+            component={Search}
+            options={tabOptions("magnify")}
           />
           <Tab.Screen
             name="Profile"

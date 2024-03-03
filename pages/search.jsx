@@ -2,7 +2,7 @@ import Layout from "../components/layout";
 import { Searchbar, Surface } from "react-native-paper";
 import { useState } from "react";
 import styles, { secondaryColour } from "../components/styles";
-import { RAWG_API_KEY } from "@env";
+import { API_SERVER_URL } from "@env";
 import { Image, Text, ScrollView, View } from "react-native";
 
 export default function Search() {
@@ -12,11 +12,9 @@ export default function Search() {
 
   const fetchResults = async () => {
     setLoading(true);
-    const response = await fetch(
-      `https://api.rawg.io/api/games?key=${RAWG_API_KEY}&page_results=5&page=1&search=${searchQuery}&search_precise=true`
-    );
+    const response = await fetch(`${API_SERVER_URL}/search/${searchQuery}`);
     const games = await response.json();
-    setGames(games.results);
+    setGames(games);
     setLoading(false);
   };
 
@@ -64,7 +62,7 @@ export default function Search() {
                     marginLeft: 5,
                   }}
                   source={{
-                    uri: game.background_image,
+                    uri: game.image,
                   }}
                 />
               </View>
@@ -92,20 +90,15 @@ export default function Search() {
                   <Text style={{ fontSize: 12 }}>{game.released}</Text>
                 )}
 
-                {game.metacritic && game.metacritic > 0 && (
+                {game.rating && game.rating > 0 && (
                   <Text style={{ fontSize: 14 }}>
-                    Metacritic score: {game.metacritic}%
+                    Metacritic score: {game.rating}%
                   </Text>
                 )}
 
                 {game.genres.length > 0 && (
                   <Text style={{ fontSize: 14, textAlign: "center" }}>
-                    Genres:{" "}
-                    {game.genres
-                      .map((genre) => {
-                        return genre.name;
-                      })
-                      .join(", ")}
+                    Genres: {game.genres.join(", ")}
                   </Text>
                 )}
               </View>

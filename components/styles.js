@@ -10,7 +10,8 @@ const styles = StyleSheet.create({
   },
 
   searchBar: {
-    marginHorizontal: 10
+    marginHorizontal: 10,
+    borderWidth: 3
   }
 });
 

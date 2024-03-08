@@ -1,6 +1,6 @@
 import { Text } from 'react-native';
-import Layout from '../components/layout';
 import React from 'react';
+import { Layout } from '../components/components';
 
 export default function Played() {
   return (

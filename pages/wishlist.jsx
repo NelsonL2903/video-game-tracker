@@ -1,5 +1,6 @@
-import { Text } from "react-native";
-import Layout from "../components/layout";
+import { Text } from 'react-native';
+import Layout from '../components/layout';
+import React from 'react';
 
 export default function Wishlist() {
   return (

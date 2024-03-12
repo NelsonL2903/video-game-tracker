@@ -1,4 +1,5 @@
 import GameCard from './gameCard';
 import Layout from './layout';
+import GameModal from './gameModal';
 
-export { GameCard, Layout };
+export { GameCard, Layout, GameModal };

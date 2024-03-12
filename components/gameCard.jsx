@@ -1,4 +1,4 @@
-import { View, Image, Text } from 'react-native';
+import { View, Image, Text, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { Surface } from 'react-native-paper';
 import { secondaryColour } from './styles';
@@ -20,65 +20,70 @@ export default function GameCard(props) {
   const { game, showModal } = props;
 
   return (
-    <Surface
-      key={game.id}
-      elevation={5}
-      onTouchEnd={() => showModal()} // Added closing parenthesis here
-      style={{
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-        textAlign: 'center',
-        height: 125,
-        margin: 10,
-        backgroundColor: secondaryColour,
-        borderTopRightRadius: 20,
-        borderBottomRightRadius: 20,
-        borderWidth: 3
+    <TouchableOpacity
+      onPress={() => {
+        showModal(game);
       }}
     >
-      <View style={{ height: '100%', width: '50%' }}>
-        <Image
-          style={{
-            width: '100%',
-            height: '100%',
-            resizeMode: 'contain',
-            marginLeft: 5
-          }}
-          source={{
-            uri: game.image
-          }}
-        />
-      </View>
-      <View
+      <Surface
+        key={game.id}
+        elevation={5}
         style={{
-          padding: 10,
-          height: '100%',
-          width: '50%',
-          alignItems: 'center',
           display: 'flex',
-          flexDirection: 'column'
+          flexDirection: 'row',
+          justifyContent: 'flex-start',
+          alignItems: 'center',
+          textAlign: 'center',
+          height: 125,
+          margin: 10,
+          backgroundColor: secondaryColour,
+          borderTopRightRadius: 20,
+          borderBottomRightRadius: 20,
+          borderWidth: 3
         }}
       >
-        <Text
+        <View style={{ height: '100%', width: '50%', paddingVertical: 5 }}>
+          <Image
+            style={{
+              width: '100%',
+              height: '100%',
+              resizeMode: 'contain',
+              marginLeft: 5
+            }}
+            source={{
+              uri: game.image
+            }}
+          />
+        </View>
+        <View
           style={{
-            fontWeight: 'bold',
-            fontSize: 15,
-            textAlign: 'center'
+            padding: 10,
+            height: '100%',
+            width: '50%',
+            alignItems: 'center',
+            display: 'flex',
+            flexDirection: 'column'
           }}
         >
-          {game.name}
-        </Text>
+          <Text
+            style={{
+              fontWeight: 'bold',
+              fontSize: 15,
+              textAlign: 'center'
+            }}
+          >
+            {game.name}
+          </Text>
 
-        {game.released && <Text style={{ fontSize: 12 }}>{game.released}</Text>}
+          {game.released && <Text style={{ fontSize: 12 }}>{game.released}</Text>}
 
-        {game.rating && game.rating > 0 && <Text style={{ fontSize: 14 }}>Metacritic score: {game.rating}%</Text>}
+          {game.rating && game.rating > 0 && <Text style={{ fontSize: 14 }}>Metacritic score: {game.rating}%</Text>}
 
-        {game.genres.length > 0 && (
-          <Text style={{ fontSize: 14, textAlign: 'center' }}>Genres: {game.genres.join(', ')}</Text>
-        )}
-      </View>
-    </Surface>
+          {game.genres.length > 0 && (
+            <Text style={{ fontSize: 14, textAlign: 'center' }}>Genres: {game.genres.join(', ')}</Text>
+          )}
+        </View>
+      </Surface>
+    </TouchableOpacity>
   );
 }
